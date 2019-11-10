@@ -1,7 +1,7 @@
 # Weather App
 
 This is a simple web app that displays
-basic weather information and uv index for a given city.
+weather information, uv index, and icon reflecting the weather for a given city.
 
 ![Alt text](weatherappscrnsht.png)
 ### Acknowledgements
