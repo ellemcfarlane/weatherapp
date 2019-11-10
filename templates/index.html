@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Weather</title>
+  <!-- Latest minified CSS from Bootstrap -->
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+  <!-- Latest Font Awesome -->
+  <link type="text/css" rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+</head>
+
+<body>
+  {% block content %}
+  <nav class="row" style="background: #FF6347; color: navajowhite;">
+    <h1 class="col-md-3 text-center">Weather</h1>
+  </nav>
+  <br />
+  <br />
+  <div class="row" style="text-align:center">
+    <form method="post" class="col-md-6 offset-md-3">
+      <div class="input-group">
+        <input type="text" class="form-control" name="city" placeholder="enter city">
+        <div class="input-group-btn">
+          <button class="btn btn-primary" type="submit">
+            <i class="fas fa-cloud-sun-rain"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h3>country: {{weather_data.country}}</h1>
+        <h5>
+          <img alt="icon" src={{weather_data.icon_link}}>
+        </h5>
+        <h5><i>{{weather_data.weather_description}}</i></h5>
+        <h5>city: {{weather_data.city_name}}</h5>
+        <h5>temp: {{weather_data.temp}}</h5>
+        <h5>pressure: {{weather_data.pressure}} </h5>
+        <h5>humidity: {{weather_data.humidity}}</h5>
+        <h5>uv index: {{weather_data.UV}}</h5>
+      </h3>
+    </div>
+  </div>
+  {% endblock %}
+</body>
+
+</html>
