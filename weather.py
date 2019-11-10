@@ -1,7 +1,8 @@
 # Created by Elle McFarlane
 from flask import Flask, render_template, request
 import json
-import urllib.request,  urllib.error
+import urllib.request
+import urllib.error
 from keys import consumer_key
 
 # Weather app that provides weather information for given city
@@ -33,7 +34,7 @@ def weather():
     except urllib.error.URLError as e: return page_not_found(e)
 
     try:
-        # convert JSON data to a list
+        # convert weather JSON data to a list
         list_weather_data = json.loads(json_weather_data)
 
         # get city coordinates for UV data
@@ -42,15 +43,16 @@ def weather():
         print(
             'http://api.openweathermap.org/data/2.5/uvi?appid=' +
             api + '&lat=' + lat + '&lon=' + lon)
-        # get ozone data at location
+        # get uv index data at location
         json_uv_data = urllib.request.urlopen(
             'http://api.openweathermap.org/data/2.5/uvi?appid=' +
             api + '&lat=' + lat + '&lon=' + lon).read()
     except urllib.error.URLError as e: return page_not_found(e)
 
+    # convert uv JSON data to a list
     list_uv_data = json.loads(json_uv_data)
 
-    # dictionary from json data
+    # create dictionary from weather and uv data
     weather_data = {
         "country": str(list_weather_data['sys']['country']),
         "temp": str(list_weather_data['main']['temp']) + ' F',
@@ -58,7 +60,7 @@ def weather():
         "icon_link": str("http://openweathermap.org/img/wn/" + list_weather_data['weather'][0]['icon'] + "@2x.png"),
         "pressure": str(list_weather_data['main']['pressure']) + ' hPa',
         "humidity": str(list_weather_data['main']['humidity']) + '%',
-        "city_name": str(list_weather_data['name']),
+        "city_name": str(list_weather_data['name']).lower(),
         "UV": str(list_uv_data['value'])
     }
     # load data to HTML format for display
